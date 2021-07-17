@@ -5,7 +5,9 @@
   "scripts": {
     "start": "parcel index.html --open",
     "build": "parcel build index.html",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "predeploy": "npm run build -- --public-url /shiny-bounty-roller",
+    "deploy": "gh-pages -d dist -b gh-pages"
   },
   "dependencies": {
     "@babel/core": "^7.12.16",
@@ -13,6 +15,7 @@
     "@testing-library/jest-dom": "^5.11.9",
     "core-js": "^3.8.3",
     "eslint-config-tram-one": "^4.0.0",
+    "gh-pages": "^3.2.3",
     "jest": "^26.6.3",
     "jest-environment-jsdom-fourteen": "^1.0.1",
     "jest-transform-css": "^2.1.0",
