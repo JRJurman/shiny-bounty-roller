@@ -1,9 +1,8 @@
 body {
-	font-family: 'Poppins', sans-serif;
-	color: #dedede;
-	background: #222;
-	font-size: 1.2em;
-	margin: 1em;
+	font-family: 'Patrick Hand SC', cursive;
+	color: #000000;
+	background: rgb(179, 179, 179);
+	font-size: 0.8em;
 }
 
 .app-header {
@@ -11,6 +10,10 @@ body {
 	padding: 1em;
 	background: #111;
 	color: #dedede;
+	display: flex;
+	align-items: center;
+	font-size: 3em;
+	justify-content: center;
 }
 
 label {
@@ -19,4 +22,30 @@ label {
 
 a {
 	color: inherit;
+}
+
+.die {
+	background:white;
+	margin: 1em;
+	border-radius: 1em;
+	border: 6px #222222 solid;
+}
+
+button {
+	font-family: inherit;
+	font-size: inherit;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.icon {
+	width: 100px;
+	height: 100px;
+}
+
+.die-row {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

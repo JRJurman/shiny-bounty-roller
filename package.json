@@ -1,5 +1,6 @@
 {
   "name": "shiny-bounty-roller",
+  "description": "Simple Dice Rolling Application",
   "version": "1.0.0",
   "scripts": {
     "start": "parcel index.html --open",

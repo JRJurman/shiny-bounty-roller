@@ -1,10 +1,12 @@
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
-import { registerHtml, start, useEffect } from 'tram-one'
+import { registerHtml, start, useStore } from 'tram-one'
 import AppHeader from './app-header'
-import AppSummary from './app-summary'
-import appTaskDescription from './app-task-description'
-import AppTaskList from './app-task-list'
+import decrementIcon from './decrement-icon'
+import DieRow from './die-row'
+import flipIcon from './flip-icon'
+import incrementIcon from './increment-icon'
+import rollIcon from './roll-icon'
 import './styles.css'
 
 /**
@@ -14,22 +16,42 @@ import './styles.css'
 
 const html = registerHtml({
 	'app-header': AppHeader,
-	'app-summary': AppSummary,
-	'app-task-list': AppTaskList,
-	'app-task-description': appTaskDescription,
+	'die-row': DieRow,
+	'roll-icon': rollIcon,
+	'flip-icon': flipIcon,
+	'increment-icon': incrementIcon,
+	'decrement-icon': decrementIcon
 })
 
 const home = () => {
-	useEffect(() => {
-		console.log('Thanks for using Tram-One!')
+	const dice = useStore([
+		null,
+		null,
+		null
+	])
+
+	const onRoll = () => {
+		dice[0] = Math.ceil(Math.random()*6)
+		dice[1] = Math.ceil(Math.random()*6)
+		dice[2] = Math.ceil(Math.random()*6)
+	}
+
+	const dieRows = dice.map((die, index) => {
+		if (die === null) return ''
+		const increment = () => { if (die != 6) dice[index]++ }
+		const decrement = () => { if (die != 1) dice[index]-- }
+		const flip = () => { dice[index] = 7 - (dice[index]) }
+		const roll = () => { dice[index] = Math.ceil(Math.random()*6) }
+		return html`<die-row value=${die} ${{increment, decrement, flip, roll}} />`
 	})
+
 	return html`
 		<main>
-			<app-header>shiny-bounty-roller checklist</app-header>
-			<app-summary />
-			<app-task-list />
-			<hr />
-			<app-task-description />
+			<app-header>
+				shiny-bounty-roller
+				<button onclick=${onRoll}><roll-icon /></button>
+			</app-header>
+			${dieRows}
 		</main>
 	`
 }
