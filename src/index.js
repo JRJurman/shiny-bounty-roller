@@ -1,6 +1,6 @@
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
-import { registerHtml, start, useStore } from 'tram-one'
+import { registerHtml, start, useEffect, useStore } from 'tram-one'
 import AppHeader from './app-header'
 import decrementIcon from './decrement-icon'
 import DieRow from './die-row'
@@ -18,40 +18,34 @@ const html = registerHtml({
 	'app-header': AppHeader,
 	'die-row': DieRow,
 	'roll-icon': rollIcon,
-	'flip-icon': flipIcon,
-	'increment-icon': incrementIcon,
-	'decrement-icon': decrementIcon
 })
 
 const home = () => {
-	const dice = useStore([
-		null,
-		null,
-		null
+	const defaultDice = useStore([
+		6,
+		6,
+		6
 	])
 
-	const onRoll = () => {
-		dice[0] = Math.ceil(Math.random()*6)
-		dice[1] = Math.ceil(Math.random()*6)
-		dice[2] = Math.ceil(Math.random()*6)
+	const reroll = () => {
+		defaultDice[0] = Math.ceil(Math.random()*6)
+		defaultDice[1] = Math.ceil(Math.random()*6)
+		defaultDice[2] = Math.ceil(Math.random()*6)
 	}
 
-	const dieRows = dice.map((die, index) => {
-		if (die === null) return ''
-		const increment = () => { if (die != 6) dice[index]++ }
-		const decrement = () => { if (die != 1) dice[index]-- }
-		const flip = () => { dice[index] = 7 - (dice[index]) }
-		const roll = () => { dice[index] = Math.ceil(Math.random()*6) }
-		return html`<die-row value=${die} ${{increment, decrement, flip, roll}} />`
+	useEffect(() => {
+		reroll()
 	})
 
 	return html`
 		<main>
 			<app-header>
 				shiny-bounty-roller
-				<button onclick=${onRoll}><roll-icon /></button>
+				<button onclick=${reroll}><roll-icon /></button>
 			</app-header>
-			${dieRows}
+			<die-row defaultValue=${defaultDice[0]} />
+			<die-row defaultValue=${defaultDice[1]} />
+			<die-row defaultValue=${defaultDice[2]} />
 		</main>
 	`
 }

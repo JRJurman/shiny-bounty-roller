@@ -1,4 +1,4 @@
-import { registerHtml } from 'tram-one'
+import { registerHtml, useStore } from 'tram-one'
 import decrementIcon from './decrement-icon'
 import die from './die'
 import flipIcon from './flip-icon'
@@ -13,14 +13,21 @@ const html = registerHtml({
 	'decrement-icon': decrementIcon
 })
 
-export default (props, children) => {
+export default ({ defaultValue }) => {
+	const die = useStore({ value: defaultValue })
+
+	const increment = () => { if (die.value != 6) die.value++ }
+	const decrement = () => { if (die.value != 1) die.value-- }
+	const flip = () => { die.value = 7 - (die.value) }
+	const roll = () => { die.value = Math.ceil(Math.random()*6) }
+
 	return html`
 		<section class="die-row">
-			<die value=${props.value} />
-			<button onclick=${props.increment}><increment-icon /></button>
-			<button onclick=${props.decrement}><decrement-icon /></button>
-			<button onclick=${props.flip}><flip-icon /></button>
-			<button onclick=${props.roll}><roll-icon /></button>
+			<die value=${die.value} />
+			<button onclick=${increment}><increment-icon /></button>
+			<button onclick=${decrement}><decrement-icon /></button>
+			<button onclick=${flip}><flip-icon /></button>
+			<button onclick=${roll}><roll-icon /></button>
 		</section>
 	`
 }

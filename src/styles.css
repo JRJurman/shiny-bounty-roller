@@ -29,6 +29,15 @@ a {
 	margin: 1em;
 	border-radius: 1em;
 	border: 6px #222222 solid;
+	transition: all 1s ease-in;
+}
+
+.tilt-left {
+	transform: rotate(15deg);
+}
+
+.tilt-right {
+	transform: rotate(-15deg);
 }
 
 button {
