@@ -24,21 +24,30 @@ a {
 	color: inherit;
 }
 
+@keyframes wiggle {
+	from {
+			transform: rotate(0deg);
+	}
+	33% {
+			transform: rotate(15deg);
+	}
+	66% {
+			transform: rotate(-15deg);
+	}
+	to {
+			transform: rotate(0deg);
+	}
+}
+
 .die {
 	background:white;
 	margin: 1em;
 	border-radius: 1em;
 	border: 6px #222222 solid;
-	transition: all 1s ease-in;
+	transition: all 0.2s ease-in;
+	animation: wiggle 0.5s normal forwards ease-in-out;
 }
 
-.tilt-left {
-	transform: rotate(15deg);
-}
-
-.tilt-right {
-	transform: rotate(-15deg);
-}
 
 button {
 	font-family: inherit;
