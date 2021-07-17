@@ -7,9 +7,6 @@ import { registerSvg, useEffect, useStore } from 'tram-one'
 const svg = registerSvg()
 
 export default (props, children) => {
-	// start dice tilted left
-	const tilt = useStore({direction: 'left'})
-
 	const valueToPoints = {
 		"1": [{ x: 50, y: 50 }],
 		"2": [{ x: 25, y: 25 }, { x: 75, y: 75 }],
@@ -25,7 +22,7 @@ export default (props, children) => {
 	const selectedClassName = props.selected ? 'selected' : ''
 
 	return svg`
-		<svg class="die ${selectedClassName} ${tilt.direction}" viewBox="0 0 100 100" width="100px" height="100px" onclick=${props.selectDice}>
+		<svg class="die ${selectedClassName}" viewBox="0 0 100 100" width="100px" height="100px" onclick=${props.selectDice}>
 			<g>
 				${pips}
 			</g>
