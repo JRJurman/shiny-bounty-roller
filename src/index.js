@@ -40,7 +40,7 @@ const home = () => {
 	return html`
 		<main>
 			<app-header>
-				shiny-bounty-roller
+				Shiny Bounty Roller
 				<button onclick=${reroll}><roll-icon /></button>
 			</app-header>
 			<die-row defaultValue=${defaultDice[0]} />
